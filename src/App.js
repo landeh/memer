@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import SearchIcon from '@material-ui/icons/Search';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import { Button } from 'antd';
+import { Input } from 'antd';
+import { Icon } from 'antd';
+import { Progress } from 'antd';
 
 class App extends React.Component {
 
@@ -28,23 +28,22 @@ class App extends React.Component {
     return (
       <div className="App">
         <form className="App-header" onSubmit={this.getMemes}>
-          <TextField value={text}
+          <Input placeholder="Search for Memes"
+            value={text}
             autoFocus
             variant="outlined"
-            label="Search for Memes"
             onChange={e=> this.setState({text: e.target.value})}
             style={{width:'100%',marginLeft:8}}
           />
-          <Button variant="contained"
+          <Button type="primary"
             color="primary"
             disabled={loading || !text} 
-            type="submit"
             style={{width:150, margin:'0 10px', height:75}}>
-            <SearchIcon style={{marginRight:8}} />
+             <Icon type='search' theme="twoTone" />
             Search
           </Button>
         </form>
-        {loading && <LinearProgress />}
+        {loading && <Progress showInfo={false} />}
         <main>
           {memes.map(meme=>{
             return <Meme key={meme.id} meme={meme} />
